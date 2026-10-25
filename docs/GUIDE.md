@@ -101,6 +101,7 @@ Le MySQL local utilise le moteur Dolt, compatible MySQL. Le PostgreSQL local est
 
 - Écrivez votre requête dans l'éditeur, puis cliquez sur **▶ Exécuter** ou appuyez sur **Ctrl + Entrée** (⌘ + Entrée sur Mac).
 - S'il y a plusieurs instructions, seule celle où se trouve le curseur est exécutée. Pour en exécuter plusieurs, sélectionnez-les.
+- **⏩ Tout exécuter** (Ctrl + Maj + Entrée) exécute toutes les instructions de l'éditeur, par exemple un script de TP collé en entier. Un résumé indique le nombre d'instructions exécutées ; chaque erreur donne son numéro de ligne (un clic y amène le curseur). Si la dernière instruction est un `SELECT`, son résultat s'affiche.
 - **Ctrl + Espace** propose les tables et les colonnes de la base.
 - **Formater** met la requête en forme ; **Plan** montre comment la base va l'exécuter.
 - **☆ Favoris** enregistre la requête ; l'onglet **Historique** garde les 1 000 dernières.
@@ -167,6 +168,44 @@ Cliquez sur le nom d'une table pour afficher ses données. Le bouton **⋯** à 
 - **Vider** la table (toutes les lignes) ou la **Supprimer**. La requête est montrée et une confirmation est demandée.
 
 ![Structure d'une table](guide/08-structure.png)
+
+### Modifier la structure d'une table
+
+La vue **Structure** permet de faire évoluer une table existante, comme dans phpMyAdmin :
+
+- **＋ Ajouter une colonne** : nom, type, valeur par défaut, obligatoire ou non ;
+- ✏️ sur une colonne : la **renommer**, changer son **type**, la rendre **obligatoire** ou modifier sa **valeur par défaut** ;
+- 🗑 sur une colonne : la **supprimer** avec ses données ;
+- **🔗 Ajouter une clé étrangère**, ou supprimer une clé existante.
+
+La requête `ALTER TABLE` générée s'affiche pendant la saisie, puis une confirmation est demandée avant de l'exécuter.
+
+![Modifier une colonne](guide/17-modifier-colonne.png)
+
+La vue Structure liste aussi les **clés étrangères** de la table et les **tables qui y font référence**.
+
+Ce que chaque base permet : SQLite ne sait que renommer ou supprimer une colonne existante (pour changer son type, il faut recréer la table) et définit ses clés étrangères à la création de la table. Pour une colonne de clé primaire, seul le nom se modifie ici, afin de ne pas perdre la numérotation automatique.
+
+### Voir le schéma des tables
+
+Le bouton **⧉**, à côté de **+ Table**, dessine le schéma de la base : une boîte par table (**PK** = clé primaire, **FK** = clé étrangère) et un trait par relation, de la table référencée (**1**) vers la table qui l'utilise (**∞**, plusieurs lignes).
+
+![Schéma des tables](guide/18-schema.png)
+
+- Glissez les tables pour les placer à votre goût ; **−**, **+** et **Ajuster** règlent le zoom.
+- **⬇ PNG** ou **⬇ SVG** enregistre le schéma, par exemple pour un rapport ou un exposé.
+
+### Importer un fichier CSV dans une table
+
+Dans le menu **⋯** d'une table, **📥 Importer un CSV** charge un fichier exporté d'Excel, de Google Sheets ou d'un autre logiciel.
+
+![Importer un CSV](guide/19-import-csv.png)
+
+1. Choisissez le fichier ou glissez-le dans la fenêtre : le séparateur (`;`, `,`, tabulation) est reconnu tout seul.
+2. Vérifiez la correspondance entre les colonnes du fichier et celles de la table (elle est proposée d'après les noms) ; choisissez **— ignorer —** pour ne pas importer une colonne.
+3. Cliquez sur **Importer**.
+
+Les cellules vides deviennent `NULL`, et les nombres à virgule (`1 234,50`) comme les dates `JJ/MM/AAAA` sont convertis. Les fichiers « CSV UTF-8 » et « CSV (séparateur : point-virgule) » d'Excel sont acceptés.
 
 ### Créer une table sans écrire de SQL
 
@@ -246,6 +285,7 @@ Cliquez sur **⋯** à droite d'une connexion, puis **Supprimer**. Vous choisiss
 | Raccourci | Action |
 | --- | --- |
 | Ctrl / ⌘ + Entrée | Exécuter l'instruction sous le curseur (ou la sélection) |
+| Ctrl / ⌘ + Maj + Entrée | Exécuter toutes les instructions de l'éditeur |
 | Ctrl / ⌘ + Maj + F | Mettre en forme la requête |
 | Ctrl + Espace (aussi sur Mac) | Compléter les tables et colonnes |
 | Ctrl / ⌘ + / | Commenter ou décommenter |
@@ -269,7 +309,7 @@ Le bouton **Aide** rappelle ces raccourcis.
 | Linux | `~/.config/SQLVault Studio` |
 | Docker | le volume `sqlvault-studio` |
 
-**Mettre à jour** : installez la nouvelle version par-dessus l'ancienne (ou relancez la commande d'installation). Vos données sont conservées.
+**Mettre à jour** : **Aide › Rechercher une mise à jour** indique si une nouvelle version existe (SQLVault Studio ne contacte GitHub que lorsque vous cliquez sur ce bouton). Installez-la par-dessus l'ancienne, ou relancez la commande d'installation : vos données sont conservées.
 
 **Désinstaller** :
 
@@ -284,7 +324,7 @@ La désinstallation garde vos données. Pour tout effacer, supprimez aussi le do
 ## 13. Questions fréquentes
 
 **Faut-il une connexion Internet ?**
-Non, sauf pour télécharger l'application et, la première fois, un serveur MySQL ou PostgreSQL local.
+Non, sauf pour télécharger l'application, la première fois un serveur MySQL ou PostgreSQL local, et pour rechercher une mise à jour.
 
 **Mes données sont-elles envoyées quelque part ?**
 Non. SQLVault Studio ne collecte rien et n'envoie rien : il n'a ni compte, ni publicité, ni statistiques d'usage.
@@ -294,6 +334,9 @@ Non : nombre de connexions, de favoris, de requêtes et d'exports illimité. Seu
 
 **La connexion à mon serveur échoue.**
 Le message indique la cause probable : hôte introuvable, port fermé, mot de passe refusé, base inexistante. Vérifiez que le serveur est démarré et utilisez **Tester la connexion**. Depuis Docker, un serveur installé sur votre poste se joint avec l'hôte `host.docker.internal`.
+
+**La base enregistrée dans ma connexion n'existe plus.**
+Choisissez simplement une autre base dans le menu **Base de données** : la liste reste disponible.
 
 **Le serveur local ne démarre pas.**
 Fermez puis rouvrez SQLVault Studio. Si le problème persiste, le journal du serveur se trouve dans le dossier de vos données, sous `serveurs/<mysql ou postgresql>/serveur.log`.

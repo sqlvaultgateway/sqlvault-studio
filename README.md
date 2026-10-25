@@ -11,7 +11,7 @@
 
 - **Un seul outil pour toutes les bases** : MySQL, MariaDB, PostgreSQL, SQL Server, Oracle et SQLite, avec le même écran.
 - **Rien d'autre à installer** : un serveur MySQL ou PostgreSQL s'installe en un clic, comme avec XAMPP, et s'arrête quand vous fermez l'application.
-- **Simple pour débuter, complet pour travailler** : afficher une table, la modifier, la créer avec un formulaire, importer ou exporter une base, sans écrire une ligne de SQL si vous le souhaitez.
+- **Simple pour débuter, complet pour travailler** : afficher une table, la créer ou modifier sa structure avec un formulaire, voir le schéma des relations, importer un CSV, exporter une base, sans écrire une ligne de SQL si vous le souhaitez.
 - **On apprend en cliquant** : chaque action affiche la requête SQL envoyée (`CREATE TABLE`, `UPDATE`, `DELETE`, `DROP`…).
 - **Une base d'exemple réaliste** pour s'exercer tout de suite : la Banque Téranga, une banque fictive avec ses clients, comptes, opérations et crédits.
 - **Gratuit et sans limite** : ni compte, ni publicité, ni nombre maximal de connexions, de favoris ou d'exports.
@@ -24,14 +24,17 @@
 | Serveur local en un clic | MySQL et PostgreSQL | MySQL |
 | Application installée sur le poste | oui, avec sa propre fenêtre | serveur web local + navigateur |
 | Base d'exemple prête à l'emploi | oui | non |
+| Schéma visuel des relations | oui | oui (concepteur) |
 | Requête SQL affichée après chaque modification | oui | oui |
 
 ## Fonctionnalités
 
-- **Éditeur** : autocomplétion des tables et colonnes, plusieurs onglets, mise en forme, plan d'exécution, favoris, historique.
+- **Éditeur** : autocomplétion des tables et colonnes, plusieurs onglets, exécution d'une instruction ou d'un script entier, mise en forme, plan d'exécution, favoris, historique.
 - **Résultats** : toutes les colonnes, tri et filtre par colonne comme dans Excel, détail d'une ligne, jusqu'à 100 000 lignes affichées.
 - **Export du résultat complet** : Excel, CSV, JSON ou instructions INSERT.
-- **Tables** : afficher, structure, créer avec un formulaire (clés primaires et étrangères), insérer, modifier par double-clic, supprimer, vider.
+- **Tables** : afficher, créer avec un formulaire (clés primaires et étrangères), modifier la structure (ajouter, renommer, supprimer une colonne, changer son type, clés étrangères), insérer, modifier par double-clic, supprimer, vider.
+- **Schéma visuel** des tables et de leurs relations, à enregistrer en PNG ou SVG.
+- **Import de fichiers CSV** dans une table (exports Excel compris).
 - **Bases** : créer, supprimer, importer et exporter des fichiers `.sql` comme les sauvegardes de phpMyAdmin (jusqu'à 1 Go).
 
 ## Installer
