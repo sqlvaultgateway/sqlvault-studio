@@ -45,7 +45,7 @@ SUMS=$(printf '%s\n' "$urls" | grep -E 'SHA256SUMS\.txt$' | head -n 1)
 FILE=$(basename "$URL")
 
 TMP=$(mktemp -d); trap 'rm -rf "$TMP"' EXIT
-say "Téléchargement de $FILE…"
+say "Téléchargement de ${FILE}…"
 curl -fL --progress-bar -o "$TMP/$FILE" "$URL"
 if [ -n "$SUMS" ]; then
   curl -fsSL -o "$TMP/SHA256SUMS.txt" "$SUMS"
