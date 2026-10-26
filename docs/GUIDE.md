@@ -338,6 +338,9 @@ Le message indique la cause probable : hôte introuvable, port fermé, mot de pa
 **La base enregistrée dans ma connexion n'existe plus.**
 Choisissez simplement une autre base dans le menu **Base de données** : la liste reste disponible.
 
+**Avec Oracle, je ne vois pas toutes les tables.**
+Pour rester rapide sur les grandes bases, la liste de gauche affiche les tables de votre schéma (celui de l'utilisateur connecté), comme SQL Developer. Si ce schéma est vide, les autres schémas accessibles sont affichés. Les tables des autres schémas restent utilisables dans vos requêtes : `SELECT * FROM AUTRE_SCHEMA.TABLE`.
+
 **Le serveur local ne démarre pas.**
 Fermez puis rouvrez SQLVault Studio. Si le problème persiste, le journal du serveur se trouve dans le dossier de vos données, sous `serveurs/<mysql ou postgresql>/serveur.log`.
 
